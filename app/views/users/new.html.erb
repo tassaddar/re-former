@@ -1,0 +1,52 @@
+<h1>New User form</h1>
+<p>Fill in the following form, please</p>
+
+<!-- Pure HTML version -->
+<!--
+<form accept-charset="UTF-8" action="/users" method = "post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<label for="user[username]"> User Name: </label>
+	<input type="text" name="user[username]"><br>
+	<label for="user[email]"> Email: </label>
+	<input type="email" name="user[email]"><br>
+	<label for="user[password]"> Password: </label>
+	<input type="password" name="user[password]"><br>
+	<input type="submit" value="Create">
+	<input type="reset">
+	
+</form>
+-->
+<!-- End of pure HTML version -->
+
+<!-- form_tag version -->
+<!--
+<%= form_tag("/users", method:"post") do %>
+	<%= label_tag(:username, "User Name") %>
+	<%= text_field_tag(:username) %>
+	<%= label_tag(:email,"Email") %>
+	<%= text_field_tag(:email) %>
+	<%= label_tag(:password,"Password") %>
+	<%= password_field_tag(:password) %>
+	<%= submit_tag("Create") %>
+<% end %>
+-->
+<!-- End of form_tag version -->
+
+<!-- form_for version -->
+
+<%= form_for @user, html: {method: "post"} do |f|%>
+<ul>
+<%= @user.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+<% end %>
+</ul>
+<%= f.label :username , "User Name"%>
+<%= f.text_field :username %><br>
+<%= f.label :email, "Please input Email" %>
+<%= f.email_field :email %><br>
+<%= f.label :password, "Password" %>
+<%= f.password_field :password %><br>
+<%= f.submit "Create" %>
+
+<% end %>
+<!-- End of form_for version -->
